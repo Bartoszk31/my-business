@@ -1,13 +1,13 @@
 import React from "react";
 
 export const useDragScroll = () => {
-    const [node, setNode] = React.useState<HTMLElement | null>(null);
+    const [node, setNode] = React.useState<HTMLDivElement>();
 
-    const ref = React.useCallback((nodeEle: HTMLElement) => {
+    const ref = React.useCallback((nodeEle: HTMLDivElement) => {
         setNode(nodeEle);
     }, []);
 
-    const handleMouseDown = React.useCallback((e: React.MouseEvent) => {
+    const handleMouseDown = React.useCallback((e: MouseEvent) => {
         if (!node) {
             return;
         }
@@ -18,7 +18,7 @@ export const useDragScroll = () => {
             y: e.clientY,
         };
 
-        const handleMouseMove = (e: React.MouseEvent) => {
+        const handleMouseMove = (e: MouseEvent) => {
             const dx = e.clientX - startPos.x;
             const dy = e.clientY - startPos.y;
             node.scrollTop = startPos.top - dy;
@@ -36,7 +36,7 @@ export const useDragScroll = () => {
         document.addEventListener('mouseup', handleMouseUp);
     }, [node]);
 
-    const handleTouchStart = React.useCallback((e: React.TouchEvent) => {
+    const handleTouchStart = React.useCallback((e: TouchEvent) => {
         if (!node) {
             return;
         }
@@ -48,7 +48,7 @@ export const useDragScroll = () => {
             y: touch.clientY,
         };
 
-        const handleTouchMove = (e: React.TouchEvent) => {
+        const handleTouchMove = (e: TouchEvent) => {
             const touch = e.touches[0];
             const dx = touch.clientX - startPos.x;
             const dy = touch.clientY - startPos.y;
@@ -67,12 +67,12 @@ export const useDragScroll = () => {
         document.addEventListener('touchend', handleTouchEnd);
     }, [node]);
 
-    const updateCursor = (ele) => {
+    const updateCursor = (ele: HTMLDivElement) => {
         ele.style.cursor = 'grabbing';
         ele.style.userSelect = 'none';
     };
 
-    const resetCursor = (ele) => {
+    const resetCursor = (ele: HTMLDivElement) => {
         ele.style.cursor = 'grab';
         ele.style.removeProperty('user-select');
     };
