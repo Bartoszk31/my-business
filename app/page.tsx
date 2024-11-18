@@ -1,4 +1,5 @@
-import Tile from '@/components/Map/Tile/Tile';
+import Link from "next/link";
+import Map from "@/components/Map/Map";
 
 export default function Home() {
   const map = [
@@ -23,7 +24,6 @@ export default function Home() {
     const row = [];
 
     while (y >= 0 && x < size) {
-      console.log(y,x);
       row.push(map[y][x]);
       y--;
       x++;
@@ -39,16 +39,31 @@ export default function Home() {
   }
 
   return (
-    <>
-      <div>{'asdasd'}</div>
-      <div className={'relative'}>
-        {mapToRender.map((row, y) => {
-            return row.map((tileId, x) => (
-                  <Tile key={`${x},${y}`} x={x} y={y} rowLength={row.length} />
-                ))}
-            )
-        }
-      </div>
-    </>
+      <>
+        <div className="w-full h-20 bg-emerald-800 sticky top-0 z-10">
+          <div className="container mx-auto px-4 h-full">
+            <div className="flex justify-between items-center h-full">
+              <ul className="hidden md:flex gap-x-6 text-white">
+                <li>
+                  <Link href="/about">
+                    <p>About Us</p>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services">
+                    <p>Services</p>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contacts">
+                    <p>Contacts</p>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <Map mapToRender={mapToRender}></Map>
+      </>
   );
 }
