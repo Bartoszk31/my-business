@@ -1,5 +1,3 @@
-import Image from "next/image";
-import tile from '@/assets/images/tiles/tile.png';
 import Tile from '@/components/Map/Tile/Tile';
 
 export default function Home() {
